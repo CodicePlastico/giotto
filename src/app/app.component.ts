@@ -10,6 +10,7 @@ import { last } from 'rxjs/operators';
 export class AppComponent {
   public measures: Measure[] = [];
   public polygons: Polygon[] = [[]];
+  public selectedPoint: Point;
   public file: File;
 
   @ViewChild('myInput') myInputVariable: ElementRef;
@@ -30,6 +31,10 @@ export class AppComponent {
     {
       label: 'Misura',
       action: 'measure'
+    },
+    {
+      label: 'Seleziona',
+      action: 'select'
     }
   ];
 
@@ -40,6 +45,7 @@ export class AppComponent {
   public handleClick(point: Point) {
     switch (this.currentAction) {
       case 'polygon':
+        this.selectedPoint = null;
         const polygons = this.polygons.slice();
         const lastPolygon = polygons.pop();
         const firstPoint = lastPolygon ? lastPolygon[0] : null;
@@ -52,6 +58,7 @@ export class AppComponent {
         }
         break;
       case 'measure':
+        this.selectedPoint = null;
         const measures = this.measures.slice();
         const lastMeasure = measures.pop();
         if (!lastMeasure) {
@@ -62,6 +69,9 @@ export class AppComponent {
           const newMeasure = Object.assign({}, lastMeasure, {to: point});
           this.measures = [...measures, newMeasure];
         }
+        break;
+      case 'select':
+        this.selectedPoint = point;
         break;
       default:
         console.log(this.currentAction, point);

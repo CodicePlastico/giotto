@@ -10,7 +10,7 @@ export interface Measure {
 
 export type Polygon = Point[];
 
-export type ButtonAction = 'polygon' | 'measure' | 'erase';
+export type ButtonAction = 'polygon' | 'measure' | 'select';
 
 export interface Button {
   label: string;

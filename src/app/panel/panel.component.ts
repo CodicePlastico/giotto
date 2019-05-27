@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild, ElementRef, Input, Output, EventEm
 import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Point, Polygon, Measure } from '../app.model';
+import * as classifyPoint from 'robust-point-in-polygon';
 
 @Component({
   selector: 'app-panel',
@@ -16,6 +17,7 @@ export class PanelComponent implements AfterViewInit, OnChanges {
   @Input() public measures: Measure[];
   @Input() public polygonsColors: string[];
   @Input() public measuresColors: string[];
+  @Input() public selectedPoint: Point;
   @Input() public file: File;
   @Output() public canvasClick: EventEmitter<Point> = new EventEmitter();
 
@@ -53,6 +55,11 @@ export class PanelComponent implements AfterViewInit, OnChanges {
         this.redraw();
       }
     }
+    if (changes.selectedPoint) {
+      if (!changes.selectedPoint.firstChange) {
+        this.redraw();
+      }
+    }
     if (changes.file) {
       if (!changes.file.firstChange) {
         this.drawFile();
@@ -73,11 +80,12 @@ export class PanelComponent implements AfterViewInit, OnChanges {
   private drawPolygons() {
     this.polygons.forEach((polygon: Polygon, i: number) => {
       const color = this.getColor(this.polygonsColors, i);
+      const isSelected = this.selectedPoint ? this.isSelected(polygon) : false;
       polygon.forEach((point: Point, j: number) => {
         this.drawPoint(point, color);
         if (j) {
           const prevPoint = polygon[j - 1];
-          this.drawLine(prevPoint, point, color);
+          this.drawLine(prevPoint, point, color, false, isSelected);
         }
       });
     });
@@ -113,10 +121,12 @@ export class PanelComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  private drawLine(a: Point, b: Point, color: string, dashed: boolean = false) {
+  private drawLine(a: Point, b: Point, color: string, dashed: boolean = false, selected = false) {
     const segments = dashed ? [5, 5] : [];
+    const lineWidth = selected ? 3 : 1;
     this.context.beginPath();
     this.context.setLineDash(segments);
+    this.context.lineWidth = lineWidth;
     this.context.moveTo(a.x, a.y);
     this.context.lineTo(b.x, b.y);
     this.context.strokeStyle = color;
@@ -147,6 +157,19 @@ export class PanelComponent implements AfterViewInit, OnChanges {
       return colors[key];
     } else {
       return '#000';
+    }
+  }
+
+  private isSelected(polygon: Polygon): boolean {
+    if (this.selectedPoint && polygon.length > 0) {
+      const computedPolygon = polygon.map((p) => {
+        return [p.x, p.y];
+      });
+      const point = [this.selectedPoint.x, this.selectedPoint.y];
+      const inside = classifyPoint(computedPolygon, point);
+      return inside < 1;
+    } else {
+      return false;
     }
   }
 }
