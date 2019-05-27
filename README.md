@@ -1,6 +1,6 @@
 # Giotto
 
-Giotto is a POC to test the functionality of drawing on Canvas
+Giotto is a POC to test the functionality of drawing on Canvas.
 It's made with Angular 7
 
 ## Development server
