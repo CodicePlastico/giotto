@@ -1,0 +1,9 @@
+<ul class="giotto-buttons">
+  <li class="giotto-buttons__item" *ngFor="let button of buttons">
+    <button
+      class="giotto-buttons__item-button"
+      [ngClass]="{'giotto-buttons__item-button--selected': button.action === currentAction}"
+      (click)="handleClick(button)"
+    >{{button.label}}</button>
+  </li>
+</ul>

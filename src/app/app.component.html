@@ -1,0 +1,30 @@
+<div class="giotto">
+  <div class="giotto__container">
+    <app-panel
+      [polygons]="polygons"
+      [measures]="measures"
+      [file]="file"
+      [polygonsColors]="polygonsColors"
+      [measuresColors]="measuresColors"
+      (canvasClick)="handleClick($event)"></app-panel>
+    <app-buttons
+      [buttons]="buttons"
+      [currentAction]="currentAction"
+      (changeAction)="handleChange($event)"></app-buttons>
+  </div>
+  <div class="giotto__main-button">
+    <button class="giotto__button" (click)="clearAll()">Svuota tutto</button>
+  </div>
+  <div class="giotto__upload">
+    <input #myInput type="file" id="file" name="file" (change)="updateFile($event.target.files)">
+    <label for="file" class="giotto__button">Carica file</label>
+  </div>
+  <div class="giotto__boards">
+    <div class="giotto__boards-column">
+      <app-measures [measures]="measures" [measuresColors]="measuresColors" (remove)="removeMeasure($event)"></app-measures>
+    </div>
+    <div class="giotto__boards-column">
+      <app-polygons [polygons]="polygons" [polygonsColors]="polygonsColors" (remove)="removePolygon($event)"></app-polygons>
+    </div>
+  </div>
+</div>

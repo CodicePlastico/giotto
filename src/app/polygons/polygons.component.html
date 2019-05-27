@@ -1,0 +1,14 @@
+<div class="giotto-polygons">
+  <h2>Poligoni</h2>
+  <ol class="giotto-polygons__list">
+    <ng-container *ngFor="let polygon of polygons; let i = index">
+      <li class="giotto-polygons__list-item" *ngIf="polygon.length > 0">
+        <span class="giotto-polygons__delete" (click)="handleClick(i)"></span>
+        <span class="giotto-polygons__color" [style.backgroundColor]="getColor(i)"></span>
+        <ul class="giotto-polygons__polygon">
+          <li *ngFor="let point of polygon">({{point.x}} {{point.y}})</li>
+        </ul>
+      </li>
+    </ng-container>
+  </ol>
+</div>

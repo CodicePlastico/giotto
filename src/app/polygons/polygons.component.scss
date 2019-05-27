@@ -1,0 +1,41 @@
+.giotto-polygons{
+  &__list{
+    list-style-position: inside;
+    list-style: none;
+
+    &-item{
+      margin-bottom: 10px;
+    }
+  }
+
+  &__polygon{
+    list-style: none;
+    display: inline;
+
+    li{
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  &__color{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  &__delete {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    background-image: url('../../assets/trash.svg');
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}

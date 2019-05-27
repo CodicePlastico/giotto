@@ -1,0 +1,22 @@
+.canvas{
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin-bottom: 20px;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.canvas-img{
+  background-image: repeating-linear-gradient(0deg,transparent,transparent 5px,#EEE 5px,#EEE 6px),repeating-linear-gradient(-90deg,transparent,transparent 5px,#EEE 5px,#EEE 6px);
+  background-size: 6px 6px;
+}
+
+.canvas-draw {
+  border: 1px solid black;
+  cursor: pointer;
+}

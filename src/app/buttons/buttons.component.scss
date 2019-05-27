@@ -1,0 +1,27 @@
+.giotto-buttons{
+  list-style: none;
+  margin: 0 0 0 20px;
+  padding: 0;
+
+  &__item{
+    &-button{
+      border: 1px solid black;
+      background-color: white;
+      color: black;
+      width: 100px;
+      padding: 10px;
+      margin-bottom: 20px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover,
+      &--selected{
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+}

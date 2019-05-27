@@ -1,0 +1,11 @@
+<div class="giotto-measures">
+    <h2>Misure</h2>
+    <ol class="giotto-measures__list">
+      <li *ngFor="let measure of measures; let i = index">
+        <span class="giotto-measures__delete" (click)="handleClick(i)"></span>
+        <span class="giotto-measures__color" [style.backgroundColor]="getColor(i)"></span>
+        {{printMeasure(measure)}}
+      </li>
+    </ol>
+  </div>
+
