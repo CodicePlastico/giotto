@@ -13,7 +13,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Publish on Github Pages
 
 Run 
-`ng build --prod --base-href "https://codiceplastico.github.io/giotto"`
+`ng build --prod --base-href "https://codiceplastico.github.io/giotto/"`
 and 
 `npx angular-cli-ghpages --dir=dist/giotto`
 to publish a new version on github pages
